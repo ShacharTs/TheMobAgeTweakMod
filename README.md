@@ -1,8 +1,3 @@
-# Mob Age Tweak Mod
-![icon](https://github.com/user-attachments/assets/a03d19df-2c13-4cf2-a41d-470d81b63b86)
-
-
-
 ## Overview
 The **Mob Age Tweak** enhances Minecraft gameplay by giving players control over the aging mechanics of passive mobs. With this mod, you can adjust mob aging cooldowns, check and reset cooldowns, and experience new features for hostile mobs (in a separate module).
 
@@ -35,17 +30,26 @@ The **Mob Age Tweak** enhances Minecraft gameplay by giving players control over
 
 - **Enable Only Baby Mobs to Spawn:**
   - Command: `mobtweaks zombie enableonlybabies`
- 
 
-  # known bug
+# List of the mobs
+villager, cow, chicken, pig, zombie, armadillo, bee, cat, camel,
+zombievillager, husk, piglin, zombifiedpiglin, zoglin, hoglin,
+sheep, rabbit, axolotl, panda, fox, donkey, goat, horse,
+llama, mule, mushroomcow, ocelot, polarbear, skeletonhorse,
+sniffer, strider, turtle, wolf, drowned
+
+
+# known bug
  When typing `mobtweaks <mob> checkcooldown`, or `mobtweaks <mob> resetcooldown`
  It will let you type a number. but will print you a error,
  just type normal without adding any number.
  Honestly, I don't know how to fix it. just ignore it and the code will work
- 
+
+
  When choosing `enableonlybabies`, if you want to disable it and still have baby and adult spawning, you need to `disableonlybabies` and then `enablebaby` , patch soon
 
-  when exit the game all the setting of the mod will reset to default setting
+
+
 
 ## Support
 
