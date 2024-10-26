@@ -1,3 +1,4 @@
+![icon.png](icon.png)
 ## Overview
 The **Mob Age Tweak** enhances Minecraft gameplay by giving players control over the aging mechanics of passive mobs. With this mod, you can adjust mob aging cooldowns, check and reset cooldowns, and experience new features for hostile mobs (in a separate module).
 
