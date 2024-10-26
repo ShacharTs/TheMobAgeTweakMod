@@ -1,6 +1,7 @@
-package net.MobAgeTweak.Mobs.Mobs.ageableMobs;
+package net.MobAgeTweak.Mobs.ageableMobs;
 
 import com.mojang.brigadier.context.CommandContext;
+import net.MobAgeTweak.config.ConfigManager;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.world.entity.animal.Wolf;
 
@@ -15,6 +16,7 @@ public class wolfTweak implements ageableMobInterface {
 
     public wolfTweak(ModContainer modContainer) {
         MinecraftForge.EVENT_BUS.register(this);
+        loadConfig();
     }
 
     @SubscribeEvent
@@ -32,6 +34,17 @@ public class wolfTweak implements ageableMobInterface {
     @Override
     public void setCooldown(int newCooldown) {
         wolfAgeCooldown = newCooldown;
+        saveConfig();
+    }
+    @Override
+    public void loadConfig() {
+        wolfAgeCooldown = ConfigManager.loadCooldown(getName());
+
+    }
+
+    @Override
+    public void saveConfig() {
+        ConfigManager.saveCooldown(getName(), wolfAgeCooldown);
     }
 
     @Override

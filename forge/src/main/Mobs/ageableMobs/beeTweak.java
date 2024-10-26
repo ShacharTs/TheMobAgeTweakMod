@@ -1,6 +1,7 @@
-package net.MobAgeTweak.Mobs.Mobs.ageableMobs;
+package net.MobAgeTweak.Mobs.ageableMobs;
 
 import com.mojang.brigadier.context.CommandContext;
+import net.MobAgeTweak.config.ConfigManager;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.world.entity.animal.Bee;
 
@@ -16,6 +17,7 @@ public class beeTweak implements ageableMobInterface {
 
     public beeTweak(ModContainer modContainer) {
         MinecraftForge.EVENT_BUS.register(this);
+        loadConfig();
     }
 
     @SubscribeEvent
@@ -33,6 +35,7 @@ public class beeTweak implements ageableMobInterface {
     @Override
     public void setCooldown(int newCooldown) {
         beeAgeCooldown = newCooldown;
+        saveConfig();
     }
 
     @Override
@@ -40,6 +43,16 @@ public class beeTweak implements ageableMobInterface {
         return Bee.class.getSimpleName();
     }
 
+    @Override
+    public void loadConfig() {
+        beeAgeCooldown = ConfigManager.loadCooldown(getName());
+
+    }
+
+    @Override
+    public void saveConfig() {
+        ConfigManager.saveCooldown(getName(), beeAgeCooldown);
+    }
 
 
     public static int handleCommands(CommandContext<CommandSourceStack> context, String command, ModContainer modContainer) {

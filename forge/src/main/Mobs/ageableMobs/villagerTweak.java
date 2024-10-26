@@ -1,6 +1,7 @@
-package net.MobAgeTweak.Mobs.Mobs.ageableMobs;
+package net.MobAgeTweak.Mobs.ageableMobs;
 
 import com.mojang.brigadier.context.CommandContext;
+import net.MobAgeTweak.config.ConfigManager;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.world.entity.npc.Villager;
 
@@ -10,12 +11,20 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModContainer;
 import org.jetbrains.annotations.NotNull;
 
-
 public class villagerTweak implements ageableMobInterface {
-    public static int villagerAgeCooldown = DEFAULT_COOLDOWN;
+    public static int villagerAgeCooldown = ConfigManager.DEFAULT_COOLDOWN; // Initialize with default cooldown
 
     public villagerTweak(ModContainer modContainer) {
         MinecraftForge.EVENT_BUS.register(this);
+        loadConfig();
+    }
+    @Override
+    public void loadConfig() {
+        villagerAgeCooldown = ConfigManager.loadCooldown(getName());
+    }
+    @Override
+    public void saveConfig() {
+        ConfigManager.saveCooldown(getName(), villagerAgeCooldown);
     }
 
     @SubscribeEvent
@@ -23,7 +32,6 @@ public class villagerTweak implements ageableMobInterface {
         if (event.getEntity() instanceof Villager villager && villager.isBaby()) {
             villager.setAge(-getCooldown() * 20);
         }
-        
     }
 
     @Override
@@ -34,14 +42,14 @@ public class villagerTweak implements ageableMobInterface {
     @Override
     public void setCooldown(int newCooldown) {
         villagerAgeCooldown = newCooldown;
+        saveConfig();
     }
+
 
     @Override
     public String getName() {
         return Villager.class.getSimpleName();
     }
-
-
 
     public static int handleCommands(CommandContext<CommandSourceStack> context, String command, ModContainer modContainer) {
         villagerTweak villagerTweakInstance = new villagerTweak(modContainer);

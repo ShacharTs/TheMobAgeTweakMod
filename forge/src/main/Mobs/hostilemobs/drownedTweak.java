@@ -4,18 +4,19 @@ import com.mojang.brigadier.context.CommandContext;
 import net.MobAgeTweak.config.ConfigManager;
 import net.MobAgeTweak.config.ConfigManager.MobSettings;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.world.entity.monster.hoglin.Hoglin;
+import net.minecraft.world.entity.monster.Drowned;
+
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModContainer;
 import org.jetbrains.annotations.NotNull;
 
-public class hoglinTweak implements hostilleMobInterface {
+public class drownedTweak implements hostilleMobInterface {
     private static boolean onlyBaby;
     private static boolean disableBaby;
 
-    public hoglinTweak(ModContainer modContainer) {
+    public drownedTweak(ModContainer modContainer) {
         MinecraftForge.EVENT_BUS.register(this);
         loadSettings();
     }
@@ -28,12 +29,12 @@ public class hoglinTweak implements hostilleMobInterface {
 
     @SubscribeEvent
     public void onEntityJoinLevelEvent(@NotNull EntityJoinLevelEvent event) {
-        if (event.getEntity() instanceof Hoglin hoglin) {
-            if (disableBaby && hoglin.isBaby()) {
-                hoglin.setBaby(false);
+        if (event.getEntity() instanceof Drowned drowned) {
+            if (disableBaby && drowned.isBaby()) {
+                drowned.setBaby(false);
             }
             if (onlyBaby) {
-                hoglin.setBaby(true);
+                drowned.setBaby(true);
             }
         }
     }
@@ -62,11 +63,11 @@ public class hoglinTweak implements hostilleMobInterface {
 
     @Override
     public String getName() {
-        return Hoglin.class.getSimpleName();
+        return Drowned.class.getSimpleName();
     }
 
     public static int handleCommands(CommandContext<CommandSourceStack> context, String command, ModContainer modContainer) {
-        hoglinTweak hoglinTweakInstance = new hoglinTweak(modContainer);
-        return hostileMobHandleCommands.handleCommands(context, command, hoglinTweakInstance);
+        drownedTweak drownedTweakInstance = new drownedTweak(modContainer);
+        return hostileMobHandleCommands.handleCommands(context, command, drownedTweakInstance);
     }
 }

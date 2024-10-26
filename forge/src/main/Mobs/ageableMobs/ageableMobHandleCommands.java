@@ -1,4 +1,4 @@
-package net.MobAgeTweak.Mobs.Mobs.ageableMobs;
+package net.MobAgeTweak.Mobs.ageableMobs;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
@@ -9,13 +9,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.ModContainer;
 
+
 public class ageableMobHandleCommands {
     public static final int DEFAULT_COOLDOWN = 1200;
-    public static final String MOD_ID = "mobagetweak";
-    int cooldown =0;
+    int cooldown;
 
     public ageableMobHandleCommands(ModContainer modContainer) {
-        MinecraftForge.EVENT_BUS.register(this);
     }
 
     public int getCooldown(int cooldown){

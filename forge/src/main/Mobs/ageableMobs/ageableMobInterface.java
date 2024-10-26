@@ -1,4 +1,4 @@
-package net.MobAgeTweak.Mobs.Mobs.ageableMobs;
+package net.MobAgeTweak.Mobs.ageableMobs;
 
 import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.commands.CommandSourceStack;
@@ -9,6 +9,9 @@ public interface ageableMobInterface {
     int getCooldown();
     void setCooldown(int newCooldown);
      String getName();
+     void loadConfig();
+     void saveConfig();
+
 
 
 

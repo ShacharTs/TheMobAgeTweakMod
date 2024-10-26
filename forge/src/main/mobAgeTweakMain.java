@@ -1,11 +1,11 @@
-package net.MobAgeTweak.Mobs;
+package net.MobAgeTweak;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
-import net.MobAgeTweak.Mobs.Mobs.ageableMobs.*;
-import net.MobAgeTweak.Mobs.Mobs.hostilemobs.*;
+import net.MobAgeTweak.Mobs.ageableMobs.*;
+import net.MobAgeTweak.Mobs.hostilemobs.*;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -28,7 +28,6 @@ public class mobAgeTweakMain {
         MinecraftForge.EVENT_BUS.register(this);
         this.modContainer = modContainer;
     }
-
     public mobAgeTweakMain() {
         // Register event bus
         MinecraftForge.EVENT_BUS.register(this);

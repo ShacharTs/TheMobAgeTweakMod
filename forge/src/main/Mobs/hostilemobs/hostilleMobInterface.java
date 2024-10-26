@@ -1,4 +1,4 @@
-package net.MobAgeTweak.Mobs.Mobs.hostilemobs;
+package net.MobAgeTweak.Mobs.hostilemobs;
 
 import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.commands.CommandSourceStack;

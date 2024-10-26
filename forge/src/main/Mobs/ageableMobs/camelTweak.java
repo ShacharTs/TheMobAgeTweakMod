@@ -1,8 +1,10 @@
-package net.MobAgeTweak.Mobs.Mobs.ageableMobs;
+package net.MobAgeTweak.Mobs.ageableMobs;
 
 import com.mojang.brigadier.context.CommandContext;
+import net.MobAgeTweak.config.ConfigManager;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.world.entity.animal.camel.Camel;
+
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -15,6 +17,7 @@ public class camelTweak implements ageableMobInterface {
 
     public camelTweak(ModContainer modContainer) {
         MinecraftForge.EVENT_BUS.register(this);
+        loadConfig();
     }
 
     @SubscribeEvent
@@ -32,6 +35,7 @@ public class camelTweak implements ageableMobInterface {
     @Override
     public void setCooldown(int newCooldown) {
         camelAgeCooldown = newCooldown;
+        saveConfig();
     }
 
     @Override
@@ -39,6 +43,14 @@ public class camelTweak implements ageableMobInterface {
         return Camel.class.getSimpleName();
     }
 
+    @Override
+    public void saveConfig() {
+        ConfigManager.saveCooldown(getName(), camelAgeCooldown);
+    }
+    @Override
+    public void loadConfig() {
+        camelAgeCooldown = ConfigManager.loadCooldown(getName());
+    }
 
 
     public static int handleCommands(CommandContext<CommandSourceStack> context, String command, ModContainer modContainer) {

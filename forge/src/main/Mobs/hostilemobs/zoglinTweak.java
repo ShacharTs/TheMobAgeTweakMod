@@ -1,31 +1,36 @@
-package net.MobAgeTweak.Mobs.Mobs.hostilemobs;
+package net.MobAgeTweak.Mobs.hostilemobs;
 
 import com.mojang.brigadier.context.CommandContext;
+import net.MobAgeTweak.config.ConfigManager;
+import net.MobAgeTweak.config.ConfigManager.MobSettings;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.world.entity.monster.Zoglin;
-
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModContainer;
 import org.jetbrains.annotations.NotNull;
 
-
 public class zoglinTweak implements hostilleMobInterface {
-    private static boolean onlyBaby = false;
-    private static boolean disableBaby = false;
+    private static boolean onlyBaby;
+    private static boolean disableBaby;
 
     public zoglinTweak(ModContainer modContainer) {
         MinecraftForge.EVENT_BUS.register(this);
+        loadSettings();
+    }
+
+    private void loadSettings() {
+        MobSettings settings = ConfigManager.getMobSettings(getName());
+        onlyBaby = settings.isOnlyBaby();
+        disableBaby = settings.isDisableBaby();
     }
 
     @SubscribeEvent
     public void onEntityJoinLevelEvent(@NotNull EntityJoinLevelEvent event) {
         if (event.getEntity() instanceof Zoglin zoglin) {
-            if (disableBaby) {
-                if (zoglin.isBaby()) {
-                    zoglin.setBaby(false);
-                }
+            if (disableBaby && zoglin.isBaby()) {
+                zoglin.setBaby(false);
             }
             if (onlyBaby) {
                 zoglin.setBaby(true);
@@ -36,6 +41,7 @@ public class zoglinTweak implements hostilleMobInterface {
     @Override
     public void setDisableBaby(boolean bool) {
         disableBaby = bool;
+        ConfigManager.saveHostileSetting(getName(), "disableBaby", bool);
     }
 
     @Override
@@ -51,6 +57,7 @@ public class zoglinTweak implements hostilleMobInterface {
     @Override
     public void setOnlyBaby(boolean bool) {
         onlyBaby = bool;
+        ConfigManager.saveHostileSetting(getName(), "onlyBaby", bool);
     }
 
     @Override

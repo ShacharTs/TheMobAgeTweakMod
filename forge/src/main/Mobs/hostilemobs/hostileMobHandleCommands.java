@@ -1,18 +1,16 @@
-package net.MobAgeTweak.Mobs.Mobs.hostilemobs;
+package net.MobAgeTweak.Mobs.hostilemobs;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.ModContainer;
 
 
 public class hostileMobHandleCommands {
     public static final String MOD_ID = "mobagetweak";
     public hostileMobHandleCommands(ModContainer modContainer) {
-        MinecraftForge.EVENT_BUS.register(this);
     }
 
     public static int handleCommands(CommandContext<CommandSourceStack> context, String command, hostilleMobInterface mob) {
