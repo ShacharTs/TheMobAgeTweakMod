@@ -1,6 +1,7 @@
 package net.MobAgeTweak.Mobs.ageableMobs;
 
 import com.mojang.brigadier.context.CommandContext;
+import net.MobAgeTweak.config.ConfigManager;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.world.entity.animal.horse.Horse;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -14,6 +15,7 @@ public class horseTweak implements ageableMobInterface {
 
     public horseTweak(ModContainer modContainer) {
         NeoForge.EVENT_BUS.register(this);
+        loadConfig();
     }
 
     @SubscribeEvent
@@ -31,6 +33,17 @@ public class horseTweak implements ageableMobInterface {
     @Override
     public void setCooldown(int newCooldown) {
         horseAgeCooldown = newCooldown;
+        saveConfig();
+    }
+    @Override
+    public void loadConfig() {
+        horseAgeCooldown = ConfigManager.loadCooldown(getName());
+
+    }
+
+    @Override
+    public void saveConfig() {
+        ConfigManager.saveCooldown(getName(), horseAgeCooldown);
     }
 
     @Override

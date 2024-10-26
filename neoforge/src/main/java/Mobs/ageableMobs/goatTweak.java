@@ -1,6 +1,7 @@
 package net.MobAgeTweak.Mobs.ageableMobs;
 
 import com.mojang.brigadier.context.CommandContext;
+import net.MobAgeTweak.config.ConfigManager;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.world.entity.animal.goat.Goat;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -14,6 +15,7 @@ public class goatTweak implements ageableMobInterface {
 
     public goatTweak(ModContainer modContainer) {
         NeoForge.EVENT_BUS.register(this);
+        loadConfig();
     }
 
     @SubscribeEvent
@@ -31,6 +33,17 @@ public class goatTweak implements ageableMobInterface {
     @Override
     public void setCooldown(int newCooldown) {
         goatAgeCooldown = newCooldown;
+        saveConfig();
+    }
+    @Override
+    public void loadConfig() {
+        goatAgeCooldown = ConfigManager.loadCooldown(getName());
+
+    }
+
+    @Override
+    public void saveConfig() {
+        ConfigManager.saveCooldown(getName(), goatAgeCooldown);
     }
 
     @Override

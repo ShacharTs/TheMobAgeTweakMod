@@ -1,6 +1,7 @@
 package net.MobAgeTweak.Mobs.ageableMobs;
 
 import com.mojang.brigadier.context.CommandContext;
+import net.MobAgeTweak.config.ConfigManager;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.world.entity.animal.Chicken;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -15,6 +16,7 @@ public class chickenTweak implements ageableMobInterface {
 
     public chickenTweak(ModContainer modContainer) {
         NeoForge.EVENT_BUS.register(this);
+        loadConfig();
     }
 
     @SubscribeEvent
@@ -32,6 +34,17 @@ public class chickenTweak implements ageableMobInterface {
     @Override
     public void setCooldown(int newCooldown) {
         chickenAgeCooldown = newCooldown;
+        saveConfig();
+    }
+    @Override
+    public void loadConfig() {
+        chickenAgeCooldown = ConfigManager.loadCooldown(getName());
+
+    }
+
+    @Override
+    public void saveConfig() {
+        ConfigManager.saveCooldown(getName(), chickenAgeCooldown);
     }
 
     @Override

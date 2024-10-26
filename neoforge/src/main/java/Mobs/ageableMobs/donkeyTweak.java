@@ -1,6 +1,7 @@
 package net.MobAgeTweak.Mobs.ageableMobs;
 
 import com.mojang.brigadier.context.CommandContext;
+import net.MobAgeTweak.config.ConfigManager;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.world.entity.animal.horse.Donkey;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -14,6 +15,7 @@ public class donkeyTweak implements ageableMobInterface {
 
     public donkeyTweak(ModContainer modContainer) {
         NeoForge.EVENT_BUS.register(this);
+        loadConfig();
     }
 
     @SubscribeEvent
@@ -31,6 +33,17 @@ public class donkeyTweak implements ageableMobInterface {
     @Override
     public void setCooldown(int newCooldown) {
         donkeyAgeCooldown = newCooldown;
+        saveConfig();
+    }
+    @Override
+    public void loadConfig() {
+        donkeyAgeCooldown = ConfigManager.loadCooldown(getName());
+
+    }
+
+    @Override
+    public void saveConfig() {
+        ConfigManager.saveCooldown(getName(), donkeyAgeCooldown);
     }
 
     @Override

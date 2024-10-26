@@ -1,6 +1,7 @@
 package net.MobAgeTweak.Mobs.ageableMobs;
 
 import com.mojang.brigadier.context.CommandContext;
+import net.MobAgeTweak.config.ConfigManager;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.world.entity.animal.Ocelot;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -14,6 +15,7 @@ public class ocelotTweak implements ageableMobInterface {
 
     public ocelotTweak(ModContainer modContainer) {
         NeoForge.EVENT_BUS.register(this);
+        loadConfig();
     }
 
     @SubscribeEvent
@@ -31,6 +33,17 @@ public class ocelotTweak implements ageableMobInterface {
     @Override
     public void setCooldown(int newCooldown) {
         ocelotAgeCooldown = newCooldown;
+        saveConfig();
+    }
+    @Override
+    public void loadConfig() {
+        ocelotAgeCooldown = ConfigManager.loadCooldown(getName());
+
+    }
+
+    @Override
+    public void saveConfig() {
+        ConfigManager.saveCooldown(getName(), ocelotAgeCooldown);
     }
 
     @Override

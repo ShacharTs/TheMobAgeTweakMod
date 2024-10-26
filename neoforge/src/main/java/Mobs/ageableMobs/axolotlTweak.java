@@ -1,6 +1,7 @@
 package net.MobAgeTweak.Mobs.ageableMobs;
 
 import com.mojang.brigadier.context.CommandContext;
+import net.MobAgeTweak.config.ConfigManager;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.world.entity.animal.axolotl.Axolotl;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -14,6 +15,7 @@ public class axolotlTweak implements ageableMobInterface {
     public static int axolotlAgeCooldown = DEFAULT_COOLDOWN;
     public axolotlTweak(ModContainer modContainer) {
         NeoForge.EVENT_BUS.register(this);
+        loadConfig();
     }
 
     @SubscribeEvent
@@ -31,6 +33,15 @@ public class axolotlTweak implements ageableMobInterface {
     @Override
     public void setCooldown(int newCooldown) {
         axolotlAgeCooldown = newCooldown;
+        saveConfig();
+    }
+    @Override
+    public void saveConfig() {
+        ConfigManager.saveCooldown(getName(), axolotlAgeCooldown);
+    }
+    @Override
+    public void loadConfig() {
+        axolotlAgeCooldown = ConfigManager.loadCooldown(getName());
     }
 
     @Override

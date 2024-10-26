@@ -9,6 +9,9 @@ public interface ageableMobInterface {
     int getCooldown();
     void setCooldown(int newCooldown);
      String getName();
+     void loadConfig();
+     void saveConfig();
+
 
 
 

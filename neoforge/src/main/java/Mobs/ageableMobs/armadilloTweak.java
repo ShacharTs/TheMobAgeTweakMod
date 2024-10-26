@@ -1,6 +1,7 @@
 package net.MobAgeTweak.Mobs.ageableMobs;
 
 import com.mojang.brigadier.context.CommandContext;
+import net.MobAgeTweak.config.ConfigManager;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.world.entity.animal.armadillo.Armadillo;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -14,6 +15,7 @@ public class armadilloTweak implements ageableMobInterface {
 
     public armadilloTweak(ModContainer modContainer) {
         NeoForge.EVENT_BUS.register(this);
+        loadConfig();
     }
 
     @SubscribeEvent
@@ -31,6 +33,16 @@ public class armadilloTweak implements ageableMobInterface {
     @Override
     public void setCooldown(int newCooldown) {
         armadilloAgeCooldown = newCooldown;
+        saveConfig();
+    }
+    @Override
+    public void saveConfig() {
+        ConfigManager.saveCooldown(getName(), armadilloAgeCooldown); // Save the updated cooldown
+    }
+
+    @Override
+    public void loadConfig() {
+        armadilloAgeCooldown = ConfigManager.loadCooldown(getName());
     }
 
     @Override

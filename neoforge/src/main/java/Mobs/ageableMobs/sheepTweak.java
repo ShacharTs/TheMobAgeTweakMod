@@ -1,6 +1,7 @@
     package net.MobAgeTweak.Mobs.ageableMobs;
 
     import com.mojang.brigadier.context.CommandContext;
+    import net.MobAgeTweak.config.ConfigManager;
     import net.minecraft.commands.CommandSourceStack;
     import net.minecraft.world.entity.animal.Sheep;
     import net.neoforged.bus.api.SubscribeEvent;
@@ -15,6 +16,7 @@
 
         public sheepTweak(ModContainer modContainer) {
             NeoForge.EVENT_BUS.register(this);
+            loadConfig();
         }
 
         @SubscribeEvent
@@ -32,6 +34,17 @@
         @Override
         public void setCooldown(int newCooldown) {
             sheepAgeCooldown = newCooldown;
+            saveConfig();
+        }
+        @Override
+        public void loadConfig() {
+            sheepAgeCooldown = ConfigManager.loadCooldown(getName());
+
+        }
+
+        @Override
+        public void saveConfig() {
+            ConfigManager.saveCooldown(getName(), sheepAgeCooldown);
         }
 
         @Override

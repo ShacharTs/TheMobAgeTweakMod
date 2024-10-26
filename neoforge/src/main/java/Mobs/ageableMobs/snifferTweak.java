@@ -1,6 +1,7 @@
 package net.MobAgeTweak.Mobs.ageableMobs;
 
 import com.mojang.brigadier.context.CommandContext;
+import net.MobAgeTweak.config.ConfigManager;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.world.entity.animal.sniffer.Sniffer;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -14,6 +15,7 @@ public class snifferTweak implements ageableMobInterface {
 
     public snifferTweak(ModContainer modContainer) {
         NeoForge.EVENT_BUS.register(this);
+        loadConfig();
     }
 
     @SubscribeEvent
@@ -31,6 +33,17 @@ public class snifferTweak implements ageableMobInterface {
     @Override
     public void setCooldown(int newCooldown) {
         snifferAgeCooldown = newCooldown;
+        saveConfig();
+    }
+    @Override
+    public void loadConfig() {
+        snifferAgeCooldown = ConfigManager.loadCooldown(getName());
+
+    }
+
+    @Override
+    public void saveConfig() {
+        ConfigManager.saveCooldown(getName(), snifferAgeCooldown);
     }
 
     @Override

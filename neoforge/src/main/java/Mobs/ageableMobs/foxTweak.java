@@ -1,6 +1,7 @@
 package net.MobAgeTweak.Mobs.ageableMobs;
 
 import com.mojang.brigadier.context.CommandContext;
+import net.MobAgeTweak.config.ConfigManager;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.world.entity.animal.Fox;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -14,6 +15,7 @@ public class foxTweak implements ageableMobInterface{
 
     public foxTweak(ModContainer modContainer) {
         NeoForge.EVENT_BUS.register(this);
+        loadConfig();
     }
     @SubscribeEvent
     public void onEntityJoinLevelEvent(@NotNull EntityJoinLevelEvent event) {
@@ -30,6 +32,17 @@ public class foxTweak implements ageableMobInterface{
     @Override
     public void setCooldown(int newCooldown) {
         foxAgeCooldown = newCooldown;
+        saveConfig();
+    }
+    @Override
+    public void loadConfig() {
+        foxAgeCooldown = ConfigManager.loadCooldown(getName());
+
+    }
+
+    @Override
+    public void saveConfig() {
+        ConfigManager.saveCooldown(getName(), foxAgeCooldown);
     }
 
     @Override

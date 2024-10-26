@@ -1,6 +1,7 @@
 package net.MobAgeTweak.Mobs.ageableMobs;
 
 import com.mojang.brigadier.context.CommandContext;
+import net.MobAgeTweak.config.ConfigManager;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.world.entity.animal.Panda;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -14,6 +15,7 @@ public class pandaTweak implements ageableMobInterface{
 
     public pandaTweak(ModContainer modContainer) {
         NeoForge.EVENT_BUS.register(this);
+        loadConfig();
     }
     @SubscribeEvent
     public void onEntityJoinLevelEvent(@NotNull EntityJoinLevelEvent event) {
@@ -30,6 +32,17 @@ public class pandaTweak implements ageableMobInterface{
     @Override
     public void setCooldown(int newCooldown) {
         pandaAgeCooldown = newCooldown;
+        saveConfig();
+    }
+    @Override
+    public void loadConfig() {
+        pandaAgeCooldown = ConfigManager.loadCooldown(getName());
+
+    }
+
+    @Override
+    public void saveConfig() {
+        ConfigManager.saveCooldown(getName(), pandaAgeCooldown);
     }
 
     @Override
