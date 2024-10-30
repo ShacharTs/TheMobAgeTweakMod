@@ -45,7 +45,7 @@ sniffer, strider, turtle, wolf, drowned
 
 
 # known bug
-It is not a bug, but when `<mob_name> disable onlybabymode` you might need to check if `<mob_name> enable baby` is on
+It is not a bug, but when `<mob_name> disable onlybabymode` it's only going to disable that mode, so baby zombie will spawn normaly 
 
 
 
