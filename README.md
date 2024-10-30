@@ -11,26 +11,30 @@ The **Mob Age Tweak** enhances Minecraft gameplay by giving players control over
 
 ### Passive Mobs
 - **Change Cooldown:**
-  - Command: `mobtweaks <mob_name> changecooldown <seconds>`
+  - Command: `mobtweaks <mob_name> change <seconds>`
   - Example:
-    - `mobtweaks cow changecooldown 30`
+    - `mobtweaks cow change 30`
 
 - **Check Cooldown:**
-  - Command: `mobtweaks <mob_name> checkcooldown`
+  - Command: `mobtweaks <mob_name> check`
   - Example:
-    - `mobtweaks chicken checkcooldown`
+    - `mobtweaks chicken check`
 
 - **Reset Cooldown:**
-  - Command: `mobtweaks <mob_name> resetcooldown`
+  - Command: `mobtweaks <mob_name> reset`
   - Example:
-    - `mobtweaks pig resetcooldown`
+    - `mobtweaks pig reset`
 
 ### Hostile Mobs (New Feature)
-- **Disable Baby Spawning:**
-  - Command: `mobtweaks zombie disablebaby`
+- **Enable/Disable Baby Spawning:**
+  - Command: `mobtweaks <mob_name> enable/disable spawnBaby`
+  - Example:
+    - `mobtweaks zombie enable/disable spawnBaby`
 
-- **Enable Only Baby Mobs to Spawn:**
-  - Command: `mobtweaks zombie enableonlybabies`
+- **Enable/Disable Only Baby Mobs to Spawn:**
+  - Command: `mobtweaks zombie enable/disable onlybabymode`
+  - Example:
+    - `mobtweaks piglin enable/disable onlybabymode`
 
 # List of the mobs
 villager, cow, chicken, pig, zombie, armadillo, bee, cat, camel,
@@ -41,14 +45,7 @@ sniffer, strider, turtle, wolf, drowned
 
 
 # known bug
- When typing `mobtweaks <mob> checkcooldown`, or `mobtweaks <mob> resetcooldown`
- It will let you type a number. but will print you a error,
- just type normal without adding any number.
- Honestly, I don't know how to fix it. just ignore it and the code will work
-
-
- When choosing `enableonlybabies`, if you want to disable it and still have baby and adult spawning, you need to `disableonlybabies` and then `enablebaby` , patch soon
-
+It is not a bug, but when `<mob_name> disable onlybabymode`' you might need to check if `<mob_name> enable baby` is on
 
 
 
@@ -57,3 +54,8 @@ sniffer, strider, turtle, wolf, drowned
 - **Mod outdated or found a bug?**
   - Discord: [ShacharTs](https://discordapp.com/users/238965273581846529)
   - Email: [Shachar.ts8@gmail.com](mailto:Shachar.ts8@gmail.com)
+
+
+ ## Special thanks to 
+  - Discord: [N4meless24 discord](https://discord.gg/gjAjR57tsR) for helping me with choosing the name of the mod
+  - YouTube [N4meless24 YouTube](https://www.youtube.com/channel/UCHJLy3lgml4j3oj1ELPTGnA) for supporting me, sub to him 
